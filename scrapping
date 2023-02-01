@@ -1,0 +1,13 @@
+import requests
+import re
+from bs4 import BeautifulSoup
+url = 'https://www.gvpce.ac.in/contactus.html'
+page = requests.get(url)
+soup = BeautifulSoup(page.text, 'html.parser')
+address = soup.find('div', attrs={'class':'info'})
+if address==None:
+    print('------')
+else:
+    x = address.find('p').text
+    x = re.sub('[\t]','',x)
+    print(x)
